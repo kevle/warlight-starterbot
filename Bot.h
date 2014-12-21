@@ -31,10 +31,12 @@ public:
 	void playGame();    ///< plays a single game of Warlight
 
 	void makeMoves();   ///< makes moves for a single turn
+
 	void addRegion(const unsigned& noRegion, const unsigned& noSuperRegion);
 	void addSuperRegion(const unsigned& noSuperRegion, const int& reward);
 	void addNeighbors(const unsigned& noRegion, const unsigned& Neighbors);
     void addWasteland(const unsigned& noRegion);
+    void addOpponentStartingRegion(const unsigned &noRegion);
 
     /// Setters for settings
 	void setBotName(const std::string& name);
@@ -43,6 +45,7 @@ public:
     void setTimebank(const int& newTimebank);
     void setTimePerMove(const int& newTimePerMove);
     void setMaxRounds(const int&  newMaxRounds);
+    void addStartingRegionSetting(const unsigned& noRegion);
 
 	/**
 	 * Adds armies to a region
@@ -90,7 +93,9 @@ private:
 	std::vector<SuperRegion> superRegions;
 	std::string botName;
 	std::string opponentBotName;
-	std::vector<int> startingRegionsreceived;
+    std::vector<int> startingRegionsReceived; // Starting regions which are available to choose from
+    std::vector<int> startingRegions; // Every available starting region
+    std::vector<int> opponentStartingRegions;
 	std::vector<int> ownedRegions;
     std::vector<int> wastelands;
 	int armiesLeft;

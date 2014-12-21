@@ -49,6 +49,8 @@ void Parser::parseSetupMap()
 		parseNeighbors();
     else if (setupType == "wastelands")
         parseWastelands();
+    else if (setupType == "opponent_starting_regions ")
+        parseOpponentStartingRegions();
 }
 void Parser::parseStartingRegions()
 {
@@ -64,6 +66,16 @@ void Parser::parseStartingRegions()
 			break;
 	}
 	theBot->setPhase(Bot::PICK_PREFERRED_REGION);
+}
+void Parser::parseOpponentStartingRegions()
+{
+    unsigned noRegion;
+    while (std::cin >> noRegion)
+    {
+        theBot->addOpponentStartingRegion(noRegion);
+        if (std::cin.peek() == '\n')
+            break;
+    }
 }
 
 void Parser::parseSettings()
@@ -105,6 +117,20 @@ void Parser::parseSettings()
         int maxRounds;
         std::cin >> maxRounds;
         theBot->setMaxRounds(maxRounds);
+    }
+    else if (settingType == "starting_regions")
+    {
+        parseAllStartingRegions();
+    }
+}
+void Parser::parseAllStartingRegions()
+{
+    unsigned noRegion;
+    while (std::cin >> noRegion)
+    {
+        theBot->addStartingRegionSetting(noRegion);
+        if (std::cin.peek() == '\n')
+            break;
     }
 }
 

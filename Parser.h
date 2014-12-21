@@ -15,22 +15,24 @@ public:
 	virtual ~Parser();
 
 	void parseInput();
-	void parseSetupMap();
-	void parseStartingRegions();
-	void parseSettings();
-	void parseUpdateMap();
-	void parseOpponentMoves();
-	void parseGo();
-	void parseSuperRegions();
-	void parseRegions();
-	void parseNeighbors();
-    void parseWastelands();
 
 private:
-	std::vector<std::string> splitString(const std::string& string, const char& delimiter);
-
 	Bot* theBot;
 
+    void parseSetupMap();
+    void parseStartingRegions();
+    void parseSettings();
+    void parseUpdateMap();
+    void parseOpponentMoves();
+    void parseGo();
+    void parseSuperRegions();
+    void parseRegions();
+    void parseNeighbors();
+    void parseWastelands();
+    void parseAllStartingRegions();
+    void parseOpponentStartingRegions();
+
+    std::vector<std::string> splitString(const std::string& string, const char& delimiter);
 };
 
 #endif // PARSER_H_INCLUDED

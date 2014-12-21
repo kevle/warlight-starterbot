@@ -30,31 +30,27 @@ void Bot::makeMoves()
     //  std::cout << botName << " attack/transfer " << from << " " << to << " "<< armiesMoved;
     /// When outputting multiple moves they must be seperated by a comma
     std::vector<std::string> moves;
-    for(int j = 0; j < ownedRegions.size(); ++j)
+    for(unsigned j = 0; j < ownedRegions.size(); ++j)
     {
         std::stringstream move;
         int i = ownedRegions[j];
         if(regions[i].getArmies() > 1)
         {
-            move << botName << " attack/transfer " << i << " " << regions[i].getNeighbor(std::rand() % regions[i].getNbNeighbors()) << " "<< (regions[i].getArmies()-1);
+            move << botName << " attack/transfer " << i << " " << regions[i].getNeighbor(std::rand() % regions[i].getNbNeighbors()) << " " << (regions[i].getArmies()-1);
         }
         moves.push_back(move.str());
     }
 
-    std::stringstream finalMoves;
-    for(int i = 0; i < moves.size(); ++i)
+    std::string finalMoves;
+    for(unsigned i = 0; i < moves.size(); ++i)
     {
-        finalMoves << moves[i];
-        if(i + 1 == moves.size())
+        finalMoves += moves[i];
+        if(i + 1 < moves.size())
         {
-            finalMoves << std::endl;
-        }
-        else
-        {
-            finalMoves << ",";
+            finalMoves += ",";
         }
     }
-    std::cout << finalMoves.str();
+    std::cout << finalMoves << std::endl;;
 }
 
 void Bot::addRegion(const unsigned& noRegion, const unsigned& noSuperRegion)
@@ -83,6 +79,10 @@ void Bot::addSuperRegion(const unsigned& noSuperRegion, const int&reward)
 	}
 	superRegions[noSuperRegion] = SuperRegion(reward);
 }
+void Bot::addOpponentStartingRegion(const unsigned& noRegion)
+{
+    opponentStartingRegions.push_back(noRegion);
+}
 
 void Bot::setBotName(const std::string& name)
 {
@@ -108,15 +108,19 @@ void Bot::setMaxRounds(const int &newMaxRounds)
 {
     maxRounds = newMaxRounds;
 }
+void Bot::addStartingRegionSetting(const unsigned& noRegion)
+{
+    startingRegions.push_back(noRegion);
+}
 
 void Bot::clearStartingRegions()
 {
-    startingRegionsreceived.clear();
+    startingRegionsReceived.clear();
 }
 
 void Bot::addStartingRegion(const unsigned& noRegion)
 {
-    startingRegionsreceived.push_back(noRegion);
+    startingRegionsReceived.push_back(noRegion);
 }
 
 void Bot::opponentPlacement(const unsigned &noRegion, const int &nbArmies)
@@ -142,8 +146,8 @@ void Bot::executeAction()
 		return;
     if (phase == Bot::PICK_PREFERRED_REGION)
 	{
-        std::cout << startingRegionsreceived.front() << "\n";
-	}
+        std::cout << startingRegionsReceived[std::rand() % startingRegionsReceived.size()] << "\n";
+    }
 	if (phase == Bot::PLACE_ARMIES)
 	{
         std::cout << botName << " place_armies " << ownedRegions[std::rand() % ownedRegions.size()] << " " << armiesLeft << "\n";
