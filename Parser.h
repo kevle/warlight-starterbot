@@ -11,13 +11,13 @@ class Bot;
 class Parser
 {
 public:
-	Parser(Bot* bot);
-	virtual ~Parser();
+    Parser(Bot* bot);
+    virtual ~Parser();
 
-	void parseInput();
+    void parseInput();
 
 private:
-	Bot* theBot;
+    Bot* theBot;
 
     void parseSetupMap();
     void parseStartingRegions();

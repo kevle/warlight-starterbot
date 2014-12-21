@@ -7,15 +7,15 @@
 
 Region::Region()
     : id(0)
-	, superRegion(0)
-	, armies(0)
+    , superRegion(0)
+    , armies(0)
 {
 }
 
 Region::Region(const int& pId, const int& pSuperRegion)
     : id(pId)
-	, superRegion(pSuperRegion)
-	, armies(0)
+    , superRegion(pSuperRegion)
+    , armies(0)
 {
 }
 
@@ -35,6 +35,6 @@ int Region::getNbNeighbors()
 
 int Region::getNeighbor(const size_t& index)
 {
-	return neighbors.at(index);
+    return neighbors.at(index);
 }
 

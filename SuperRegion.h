@@ -10,16 +10,19 @@
 class SuperRegion
 {
 public:
-	SuperRegion();
-	SuperRegion(const int& pReward);
+    SuperRegion();
+    SuperRegion(const int& pReward);
 
-	virtual ~SuperRegion();
-	void addRegion(const int& region);
-	size_t size() { return regions.size(); }
+    virtual ~SuperRegion();
+    void addRegion(const int& region);
+    size_t size()
+    {
+        return regions.size();
+    }
 
 private:
-	std::vector<int> regions;
-	int reward;
+    std::vector<int> regions;
+    int reward;
 };
 
 #endif // SUPERREGION_H_INCLUDED
