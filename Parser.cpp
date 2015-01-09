@@ -12,7 +12,7 @@
 #include "tools/StringManipulation.h"
 
 Parser::Parser(Bot* bot) :
-		theBot(bot)
+	theBot(bot)
 {
 }
 
@@ -113,6 +113,24 @@ void Parser::parseSettings()
 			if (lineEnds())
 				break;
 		}
+	}
+	else if (settingType == "timebank")
+	{
+		int timebank;
+		std::cin >> timebank;
+		theBot->setTimebank(timebank);
+	}
+	else if (settingType == "time_per_move")
+	{
+		int timePerMove;
+		std::cin >> timePerMove;
+		theBot->setTimePerMove(timePerMove);
+	}
+	else if (settingType == "max_rounds")
+	{
+		int maxRounds;
+		std::cin >> maxRounds;
+		theBot->setMaxRounds(maxRounds);
 	}
 }
 

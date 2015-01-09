@@ -18,6 +18,17 @@ public:
 	virtual ~Parser();
 
 	void parseInput();
+
+private:
+	Parser();
+	Bot* theBot;
+
+	// helper function for the case we want to handle \r\n in future
+	inline bool lineEnds()
+	{
+		return bool(std::cin.peek() == '\n');
+	}
+
 	void parseSetupMap();
 	void parseStartingRegions();
 	void parseSettings();
@@ -26,18 +37,12 @@ public:
 	void parseGo();
 	void parseSuperRegions();
 	void parseRegions();
-	void parsePickStartingRegion();
-	void parseOpponentStartingRegions();
 	void parseNeighbors();
 	void parseWastelands();
+	void parseOpponentStartingRegions();
+	void parsePickStartingRegion();
 
-private:
-	Parser();
-	Bot* theBot;
-
-	// helper function for the case we want to handle \r\n in future
-	inline bool lineEnds(){ return bool(std::cin.peek() == '\n'); }
-
+	std::vector<std::string> splitString(const std::string& string, const char& delimiter);
 };
 
 #endif // PARSER_H_INCLUDED

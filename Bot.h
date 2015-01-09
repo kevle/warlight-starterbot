@@ -38,6 +38,7 @@ public:
 	void addSuperRegion(const unsigned& noSuperRegion, const int& reward);
 	void addNeighbors(const unsigned& noRegion, const unsigned& Neighbors);
 	void addWasteland(const unsigned& noRegion);
+	void addOpponentStartingRegion(const unsigned &noRegion);
 
 	/// Setters for settings
 	void setBotName(const std::string& name);
@@ -46,6 +47,7 @@ public:
 	void setTimebank(const int& newTimebank);
 	void setTimePerMove(const int& newTimePerMove);
 	void setMaxRounds(const int& newMaxRounds);
+	void addStartingRegionSetting(const unsigned& noRegion);
 
 	/**
 	 * Adds armies to a region
@@ -63,8 +65,6 @@ public:
 
 	void clearStartingRegions();
 	void addStartingRegion(const unsigned& noRegion);
-
-	void addOpponentStartingRegion(const unsigned& noRegion);
 
 	void opponentPlacement(const unsigned& noRegion, const int& nbArmies);
 	void opponentMovement(const unsigned& noRegion, const unsigned& toRegion, const int& nbArmies);
@@ -95,8 +95,9 @@ private:
 	std::vector<SuperRegion> superRegions;
 	std::string botName;
 	std::string opponentBotName;
-	std::vector<int> startingRegionsreceived;
-	std::vector<unsigned> opponentStartingRegions;
+	std::vector<int> startingRegionsReceived; // Starting regions which are available to choose from
+	std::vector<int> startingRegions; // Every available starting region
+	std::vector<int> opponentStartingRegions;
 	std::vector<int> ownedRegions;
 	std::vector<int> wastelands;
 	int armiesLeft;

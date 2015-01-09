@@ -25,4 +25,5 @@ QMAKE_EXTRA_TARGETS += zip
 
 # Input
 SOURCES += Bot.cpp main.cpp Parser.cpp Region.cpp SuperRegion.cpp
+HEADERS += Bot.h Parser.h Region.h SuperRegion.h
 

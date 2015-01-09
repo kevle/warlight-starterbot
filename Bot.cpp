@@ -9,7 +9,7 @@
 #include "tools/StringManipulation.h"
 
 Bot::Bot() :
-		armiesLeft(0), timebank(0), timePerMove(0), maxRounds(0), parser(this), phase(NONE)
+	armiesLeft(0), timebank(0), timePerMove(0), maxRounds(0), parser(this), phase(NONE)
 {
 }
 
@@ -25,13 +25,13 @@ void Bot::playGame()
 
 void Bot::pickStartingRegion()
 {
-	std::cout << startingRegionsreceived.front() << std::endl;
+	std::cout << startingRegionsReceived.front() << std::endl;
 }
 
 void Bot::placeArmies()
 {
 	std::cout << botName << " place_armies " << ownedRegions[std::rand() % ownedRegions.size()] << " " << armiesLeft
-			<< std::endl;
+	          << std::endl;
 	addArmies(ownedRegions[0], armiesLeft);
 }
 
@@ -50,8 +50,8 @@ void Bot::makeMoves()
 		if (regions[i].getArmies() <= 1)
 			continue;
 		move << botName << " attack/transfer " << i << " "
-				<< regions[i].getNeighbor(std::rand() % regions[i].getNbNeighbors()) << " "
-				<< (regions[i].getArmies() - 1);
+		     << regions[i].getNeighbor(std::rand() % regions[i].getNbNeighbors()) << " "
+		     << (regions[i].getArmies() - 1);
 		moves.push_back(move.str());
 	}
 
@@ -84,6 +84,10 @@ void Bot::addSuperRegion(const unsigned& noSuperRegion, const int&reward)
 	}
 	superRegions[noSuperRegion] = SuperRegion(reward);
 }
+void Bot::addOpponentStartingRegion(const unsigned& noRegion)
+{
+	opponentStartingRegions.push_back(noRegion);
+}
 
 void Bot::setBotName(const std::string& name)
 {
@@ -109,21 +113,21 @@ void Bot::setMaxRounds(const int &newMaxRounds)
 {
 	maxRounds = newMaxRounds;
 }
+void Bot::addStartingRegionSetting(const unsigned& noRegion)
+{
+	startingRegions.push_back(noRegion);
+}
 
 void Bot::clearStartingRegions()
 {
-	startingRegionsreceived.clear();
+	startingRegionsReceived.clear();
 }
 
 void Bot::addStartingRegion(const unsigned& noRegion)
 {
-	startingRegionsreceived.push_back(noRegion);
+	startingRegionsReceived.push_back(noRegion);
 }
 
-void Bot::addOpponentStartingRegion(const unsigned& noRegion)
-{
-	opponentStartingRegions.push_back(noRegion);
-}
 void Bot::opponentPlacement(const unsigned & noRegion, const int & nbArmies)
 {
 	// suppress unused variable warnings
@@ -200,7 +204,7 @@ void Bot::moveArmies(const unsigned& noRegion, const unsigned& toRegion, const i
 		else
 		{
 			regions[noRegion].setArmies(
-					regions[noRegion].getArmies() + nbArmies - std::round(regions[toRegion].getArmies() * 0.7));
+			    regions[noRegion].getArmies() + nbArmies - std::round(regions[toRegion].getArmies() * 0.7));
 			regions[toRegion].setArmies(regions[toRegion].getArmies() - std::round(nbArmies * 0.6));
 		}
 	}
